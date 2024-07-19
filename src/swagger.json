@@ -1,0 +1,76 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "rentalX-documentation",
+        "description": "This is a Rental Cars AP",
+        "version": "1.0.0",
+        "contact": {
+            "email": "devlthiagolinch@gmail.com"
+        }
+    },
+    "paths": {
+        "/categories": {
+            "post": {
+                "summary": "Create a Category",
+                "description": "To create a new category",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "name": "category name sample",
+                                    "description": "category description sample"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "201": {
+                        "description": "Created"
+                    },
+                    "500": {
+                        "description": "Category already exists"
+                    }
+                }
+            },
+            "get": {
+                "summary": "List",
+                "Description": "Listing all categories",
+                "responses": {
+                    "description": "Success",
+                    "200":  {
+                        "content": {
+                            "application/json": {
+                                "schema":{
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "description": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
