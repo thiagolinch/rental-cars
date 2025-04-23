@@ -1,7 +1,7 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
-  entry: ["src/shared/http/server.ts", "src/shared/typeorm/migrations/**/*.ts"],
+  entry: ["reflect-metadata", "src/shared/http/server.ts", "src/shared/typeorm/migrations/**/*.ts"],
   outDir: "dist",
   splitting: false,
   sourcemap: true,
