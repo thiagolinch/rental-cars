@@ -1,12 +1,16 @@
 {
     "type": "postgres",
     "port": 5432,
-    "host": "localhost",
-    "username": "docker",
-    "password": "ignite",
-    "database": "rentx",
+    "host": "projetos-tl.c7i88oiykryo.us-east-2.rds.amazonaws.com",
+    "username": "thiago",
+    "password": "Scarif2024$",
+    "database": "projetos-tl",
+    "entities": ["./src/modules/**/entities/*.ts"],
     "migrations": ["./src/shared/typeorm/migrations/*.ts"],
     "cli": {
         "migrationsDir": "./src/shared/typeorm/migrations"
+    },
+    "ssl": {
+        "rejectUnauthorized": false
     }
 }
