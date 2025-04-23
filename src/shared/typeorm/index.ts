@@ -7,22 +7,33 @@ import { Category } from '../../modules/cars/entities/Category';
 import { Specification } from '../../modules/cars/entities/Specification';
 import { Rental } from '../../modules/rental/entities/Rental';
 
-export default async (host = "database_ignite"): Promise<Connection> => {
-  const defaultOptions = await getConnectionOptions();
-  
-  return createConnection(
-    Object.assign(defaultOptions, {
-      host: process.env.NODE_ENV === "test" ? "localhost" : host,
-      database: process.env.NODE_ENV === "test" ? "rentx_database" : defaultOptions.database,
-      entities: [
-        Category,
+interface IOptions {
+  host: string;
+}
+
+getConnectionOptions().then(options => {
+  const newOptions = options as IOptions;
+  newOptions.host = 'projetos-tl.c7i88oiykryo.us-east-2.rds.amazonaws.com';
+
+  createConnection({
+    ...options,
+    entities: [
+      Category,
         Specification,
         User,
         Car,
         CarImage,
         Rental,
         UserTokens
-      ]
-    })
-  );
-};
+    ],
+    migrations: [
+      // esse caminho é relativo a partir do build, ou seja, dist/
+      './typeorm/migrations/*.js'
+    ],
+    cli: {
+      migrationsDir: 'src/shared/typeorm/migrations',
+    }
+  });
+});
+
+export { createConnection }

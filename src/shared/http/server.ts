@@ -1,3 +1,3 @@
 import { app } from "./app";
-
-app.listen(3333, () => console.log('Server is running bitch!'))
+const port = 3333
+app.listen(port, () => {console.log(`server is running! ${port} `)})
