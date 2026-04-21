@@ -1,3 +1,4 @@
+import { RequestHandler } from "express";
 import { Router } from "express";
 import multer from "multer";
 
@@ -25,6 +26,7 @@ const createCarsSpecificationsController = new CreateCarSpecificationsController
 carsRoutes.post("/", ensureAuthenticate, ensureAdmin, createCarController.handle)
 carsRoutes.get("/available", listAvailableController.handle)
 carsRoutes.post("/specifications/:id", ensureAuthenticate, ensureAdmin, createCarsSpecificationsController.handle)
-carsRoutes.post("/images/:id", ensureAuthenticate, ensureAdmin, uploadCarImage.array("images"),uploadCarImageController.handle)
+carsRoutes.post("/images/:id", ensureAuthenticate, ensureAdmin, uploadCarImage.array("images") as unknown as RequestHandler,
+uploadCarImageController.handle)
 
 export { carsRoutes }

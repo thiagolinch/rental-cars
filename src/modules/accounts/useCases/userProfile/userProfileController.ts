@@ -8,10 +8,15 @@ class UserProfileController {
         const { id } = request.user;
         const userProfileUC = container.resolve(UserProfileUseCase)
 
-        const user = await userProfileUC.execute(id)
-        console.log(user)
+        try {
+            const user = await userProfileUC.execute(id)
 
-        return response.status(200).json(user)
+            return response.status(200).json(user)
+        } catch (error) {
+            return response.status(400).json({
+                error: error.message || "Unexpected error"
+            });
+        }
     }
 }
 

@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: rental-car
+    env: node
+    buildCommand: yarn install && yarn build
+    startCommand: node dist/shared/http/server.js
+    envVars:
+      - key: DATABASE_URL
+        value: postgresql://postgres.bkldggvzpfircprmtbvd:Scarif2024$@aws-1-us-west-2.pooler.supabase.com:5432/postgres
+      - key: NODE_ENV
+        value: development

@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { RequestHandler, Router } from "express";
 import multer from "multer";
 
 import { ensureAuthenticate } from "../middlewares/ensureAuthenticate";
@@ -21,7 +21,7 @@ const updateUserAvatarContoller = new UpdateUserAvatarController()
 
 userRoutes.post("/", createUserController.handle)
 userRoutes.get("/", ensureAuthenticate, ensureAdmin, listUsersController.handle)
-userRoutes.patch("/avatar",uploadAvatar.single("avatar"), ensureAuthenticate, updateUserAvatarContoller.handle)
+userRoutes.patch("/avatar",uploadAvatar.single("avatar") as unknown as RequestHandler, ensureAuthenticate, updateUserAvatarContoller.handle)
 userRoutes.get("/profile", ensureAuthenticate, userProfileController.handle)
 
 export { userRoutes }

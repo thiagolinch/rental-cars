@@ -10,9 +10,15 @@ class ListCategoriesController {
 
         const listCategoriesUseCase = container.resolve(ListCategoriesUseCase)
 
-        const categoriesList = await listCategoriesUseCase.execute();
+        try {
+            const categoriesList = await listCategoriesUseCase.execute();
         
-        return response.json(categoriesList)
+            return response.json(categoriesList)
+        } catch (error) {
+            return response.status(400).json({
+                error: error.message || "Unexpected error"
+            });
+        }
     }
 }
 

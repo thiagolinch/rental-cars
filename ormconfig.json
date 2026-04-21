@@ -1,10 +1,10 @@
 {
     "type": "postgres",
     "port": 5432,
-    "host": "projetos-tl.c7i88oiykryo.us-east-2.rds.amazonaws.com",
-    "username": "thiago",
+    "host": "aws-1-us-west-2.pooler.supabase.com",
+    "username": "postgres.bkldggvzpfircprmtbvd",
     "password": "Scarif2024$",
-    "database": "projetos-tl",
+    "database": "postgres",
     "entities": ["./src/modules/**/entities/*.ts"],
     "migrations": ["./src/shared/typeorm/migrations/*.ts"],
     "cli": {

@@ -13,7 +13,7 @@ interface IOptions {
 
 getConnectionOptions().then(options => {
   const newOptions = options as IOptions;
-  newOptions.host = 'projetos-tl.c7i88oiykryo.us-east-2.rds.amazonaws.com';
+  newOptions.host = 'aws-1-us-west-2.pooler.supabase.com';
 
   createConnection({
     ...options,

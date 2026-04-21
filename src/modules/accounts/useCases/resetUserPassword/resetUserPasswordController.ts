@@ -10,9 +10,16 @@ class ResetUserPasswordController {
         const resetUserPasswordUseCase = container.resolve(ResetUserPasswordUseCase);
         const {token} = request.query;
         const {password} = request.body;
-        await resetUserPasswordUseCase.execute({ token: String(token), password })
+        
+        try {
+            await resetUserPasswordUseCase.execute({ token: String(token), password })
 
-        return response.status(200).send();
+            return response.status(200).send();
+        } catch (error) {
+            return response.status(400).json({
+                error: error.message || "Unexpected error"
+            });
+        }
     }
 }
 

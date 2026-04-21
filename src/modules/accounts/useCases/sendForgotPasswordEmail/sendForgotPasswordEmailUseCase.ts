@@ -41,7 +41,7 @@ class SendForgotPasswordUseCase {
         });
 
         const variables = {
-            name: user.name,
+            name: user.username,
             link: `${process.env.FORGOT_MAIL_URL}${token}`
         }
 

@@ -10,9 +10,15 @@ class ImportSpecificationController {
 
         const specificationUseCase = container.resolve(ImportSpecificationUseCase)
 
-        specificationUseCase.execute(file)
+        try {
+            await specificationUseCase.execute(file)
 
-        return response.status(200).send()
+            return response.status(200).send()
+        } catch (error) {
+            return response.status(400).json({
+                error: error.message || "Unexpected error"
+            });
+        }
     }
 }
 

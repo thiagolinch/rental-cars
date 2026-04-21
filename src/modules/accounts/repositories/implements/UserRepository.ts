@@ -10,9 +10,9 @@ class UserRepository implements IUserRepository {
         this.repository = getRepository(User)
     }
 
-    async create({name, email, password, driver_license, isAdmin, id, avatar}: ICreateUserDTO): Promise<void> {
+    async create({username, email, password, driver_license, isAdmin, id, avatar}: ICreateUserDTO): Promise<void> {
         const user = this.repository.create({
-            name,
+            username,
             email,
             password,
             driver_license,

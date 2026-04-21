@@ -10,9 +10,15 @@ class ListSpecificationsController {
 
         const listSpecificationUseCase = container.resolve(ListSpecificationsUseCase)
 
-        const specificationList = await listSpecificationUseCase.execute()
+        try {
+            const specificationList = await listSpecificationUseCase.execute()
         
-        return response.json(specificationList)
+            return response.json(specificationList)
+        } catch (error) {
+            return response.status(400).json({
+                error: error.message || "Unexpected error"
+            });
+        }
     }
 }
 

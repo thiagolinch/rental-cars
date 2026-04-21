@@ -29,7 +29,7 @@ describe("Send forgot email test", () => {
         const sendEmail  = jest.spyOn(mailProvider, "sendMail");
 
         await userRepositoryInMemory.create({
-            name: "Elijah Walton",
+            username: "Elijah Walton",
             email: "epnivor@ebho.pa",
             password: "1234",
             driver_license: "21079424"
@@ -48,7 +48,7 @@ describe("Send forgot email test", () => {
         const generateToken = jest.spyOn(userTokenRepository, "create")
 
         userRepositoryInMemory.create({
-            name: "Lillie Byrd",
+            username: "Lillie Byrd",
             email: "bojuw@dop.pr",
             password: "1234",
             driver_license: "2807959"
@@ -56,6 +56,6 @@ describe("Send forgot email test", () => {
 
         await sendForgotPasswordUseCase.execute("bojuw@dop.pr");
 
-        expect(generateToken).toBeCalled()
+        expect(generateToken).toHaveBeenCalled()
     })
 })

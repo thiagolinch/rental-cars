@@ -10,9 +10,15 @@ class SendForgotPasswordEmailController {
 
         const sendForgotPasswordUseCase = container.resolve(SendForgotPasswordUseCase)
 
-        await sendForgotPasswordUseCase.execute(email)
+        try {
+            await sendForgotPasswordUseCase.execute(email)
 
-        return response.status(200).send()
+            return response.status(200).send()
+        } catch (error) {
+            return response.status(400).json({
+                error: error.message || "Unexpected error"
+            });
+        }
         
     }
 }

@@ -4,7 +4,7 @@ import { Connection } from "typeorm";
 import { v4 as uuid } from "uuid";
 
 import { app } from "../../../../shared/http/app";
-import createConnection from "../../../../shared/typeorm";
+import { createConnection } from "../../../../shared/typeorm";
 
 let connection: Connection;
 describe("Create Category Controller", () => {

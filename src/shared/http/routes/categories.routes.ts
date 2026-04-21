@@ -1,6 +1,6 @@
 // Primeiro importar de dentro do EXPRESS a função ROUTER
 // exportar as rotas de uma maneira diferente
-import { Router } from 'express';
+import { RequestHandler, Router } from 'express';
 
 import multer from 'multer';
 import { ensureAuthenticate } from '../middlewares/ensureAuthenticate';
@@ -30,7 +30,7 @@ categoriesRoutes.use(ensureAuthenticate)
 // aqui eu chamo a função de rota e defino o método a ser usado como post,
 // para enviar dados para a tabela de categorias/categories.
 categoriesRoutes.post("/", createCategoryController.handle);
-categoriesRoutes.post("/import", upload.single("file"), importCategoryController.handle)
+categoriesRoutes.post("/import", upload.single("file") as unknown as RequestHandler, importCategoryController.handle)
 categoriesRoutes.get("/", listCategoriesController.handle)
 categoriesRoutes.delete("/:id", deleteCategoryController.handle)
 

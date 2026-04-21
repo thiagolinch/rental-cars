@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { RequestHandler, Router } from "express";
 import multer from 'multer'
 import { ensureAuthenticate } from "../middlewares/ensureAuthenticate";
 
@@ -17,7 +17,7 @@ const listSpecificationController = new ListSpecificationsController()
 
 specificationRoutes.use(ensureAuthenticate)
 specificationRoutes.post("/", createSpecificationController.handle)
-specificationRoutes.post("/import", upload.single("file"), importSpecificationController.handle)
+specificationRoutes.post("/import", upload.single("file") as unknown as RequestHandler, importSpecificationController.handle)
 specificationRoutes.get("/", listSpecificationController.handle)
 
 export { specificationRoutes }

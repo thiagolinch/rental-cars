@@ -10,9 +10,15 @@ class UpdateUserAvatarController {
         const updateUserAvatarUseCase = container.resolve(UpdateUserAvatarUseCase)
         const avatarFile = request.file.filename;
 
-        updateUserAvatarUseCase.execute({user_id: id, avatarFile})
+        try {
+            await updateUserAvatarUseCase.execute({user_id: id, avatarFile})
 
-        return response.status(204).send()
+            return response.status(204).send()
+        } catch (error) {
+            return response.status(400).json({
+            error: error.message || "Unexpected error"
+            });
+        }
     }
 }
 
