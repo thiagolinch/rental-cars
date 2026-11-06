@@ -4,12 +4,16 @@ import { Connection } from "typeorm";
 import { v4 as uuid } from "uuid";
 
 import { app } from "../../../../shared/http/app";
-import { createConnection } from "../../../../shared/typeorm";
+import { connectDatabase } from "../../../../shared/typeorm";
 
 let connection: Connection;
 describe("Create Category Controller", () => {
   beforeAll(async () => {
-    connection = await createConnection();
+    const testDatabaseUrl = process.env.TEST_DATABASE_URL;
+    if (!testDatabaseUrl) {
+      throw new Error('TEST_DATABASE_URL deve apontar para um banco exclusivo de testes.');
+    }
+    connection = await connectDatabase(testDatabaseUrl);
     await connection.runMigrations();
 
     const id = uuid();
