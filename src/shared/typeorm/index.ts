@@ -7,8 +7,8 @@ import { Category } from '../../modules/cars/entities/Category';
 import { Specification } from '../../modules/cars/entities/Specification';
 import { Rental } from '../../modules/rental/entities/Rental';
 
-export async function connectDatabase(): Promise<Connection> {
-  const databaseUrl = process.env.DATABASE_URL;
+export async function connectDatabase(connectionUrl?: string): Promise<Connection> {
+  const databaseUrl = connectionUrl || process.env.DATABASE_URL;
   if (!databaseUrl) {
     throw new Error('DATABASE_URL nao configurada.');
   }
