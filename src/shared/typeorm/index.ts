@@ -1,4 +1,5 @@
 import { Connection, createConnection } from 'typeorm';
+import { join } from 'path';
 import { User } from '../../modules/accounts/entities/User';
 import { UserTokens } from '../../modules/accounts/entities/UserToken';
 import { Car } from '../../modules/cars/entities/Car';
@@ -18,10 +19,9 @@ export async function connectDatabase(connectionUrl?: string): Promise<Connectio
     url: databaseUrl,
     ssl: { rejectUnauthorized: true },
     entities: [Category, Specification, User, Car, CarImage, Rental, UserTokens],
-    migrations: [
-      'src/shared/typeorm/migrations/*.ts',
-      'dist/src/shared/typeorm/migrations/*.js',
-    ],
+    // Carrega somente o formato compatível com o runtime atual.
+    // O Node em produção não deve importar migrations TypeScript diretamente.
+    migrations: [join(__dirname, 'migrations', `*.${__filename.endsWith('.ts') ? 'ts' : 'js'}`)],
     cli: { migrationsDir: 'src/shared/typeorm/migrations' },
   });
 }
