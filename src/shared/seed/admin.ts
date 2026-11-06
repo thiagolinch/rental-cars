@@ -2,11 +2,11 @@ import { getConnection } from "typeorm";
 import { v4 as uuidV4 } from 'uuid';
 import { hash } from 'bcryptjs';
 
-import {createConnection} from "../typeorm"
+import { connectDatabase } from "../typeorm"
 
 async function create() {
     
-    const connection = await createConnection();
+    const connection = await connectDatabase();
     
     const id = uuidV4()
     const password = await hash('admin', 9)
@@ -16,7 +16,7 @@ async function create() {
         values('${id}', 'Thiago Linch', 'admin@rentx.com.br', '${password}', 'true', 'now()', 'XXXXX-XXX')`
     )
 
-    connection.close
+    await connection.close();
 }
 
 create().then(() => console.log("User admin created"))
