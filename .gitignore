@@ -3,3 +3,6 @@ tmp
 coverage
 .dist
 dist
+.env
+.env.*
+!.env.example
